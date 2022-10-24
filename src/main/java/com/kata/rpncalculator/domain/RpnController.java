@@ -6,6 +6,8 @@ import com.kata.rpncalculator.exceptions.BadOperatorException;
 import com.kata.rpncalculator.exceptions.OperationFailedException;
 import com.kata.rpncalculator.exceptions.StackNotFoundException;
 import com.kata.rpncalculator.services.RpnService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +63,7 @@ public class RpnController {
     }
 
     @PostMapping("/op/{op}/stack/{id}")
+    @Operation(summary = "applique un operateur",description = "apply op")
     public ResponseEntity<CalculatorStack> applyOperator(@PathVariable(name = "id") final Long id, @PathVariable(name = "op") final String op) {
         try {
             final CalculatorOperator operator = CalculatorOperator.getOperatorByValue(op);
