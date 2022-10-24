@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Stack {
+public class CalculatorStack {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "stack_id")
@@ -15,7 +15,7 @@ public class Stack {
     @ElementCollection
     private List<Double> values;
 
-    public Stack(){
+    public CalculatorStack(){
         this.values = new ArrayList<>();
     }
 
