@@ -6,11 +6,13 @@ import com.kata.rpncalculator.data.utilities.CalculatorOperator;
 import com.kata.rpncalculator.exceptions.OperationFailedException;
 import com.kata.rpncalculator.exceptions.StackNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class RpnServiceImpl implements RpnService {
 
     @Autowired

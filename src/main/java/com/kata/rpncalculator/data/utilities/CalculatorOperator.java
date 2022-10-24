@@ -6,7 +6,7 @@ public enum CalculatorOperator {
     ADD("+", (a, b) -> a + b),
     SUBTRACT("-", (a, b) -> a - b),
     MULTIPLY("*", (a, b) -> a * b),
-    DIVIDE("/", (a, b) -> {
+    DIVIDE("divide", (a, b) -> {
         if (b == 0d) {
             throw new RuntimeException("Divide by zero");
         }

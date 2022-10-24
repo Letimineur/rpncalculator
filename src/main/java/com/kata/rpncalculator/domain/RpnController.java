@@ -40,7 +40,7 @@ public class RpnController {
         try {
             return new ResponseEntity<>(this.rpnService.getStack(id), HttpStatus.OK);
         } catch (final StackNotFoundException e) {
-            log.warn(e.getMessage(), e);
+            log.warn("getStackById: " + e.getMessage());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
@@ -55,7 +55,7 @@ public class RpnController {
         try {
             return new ResponseEntity<>(this.rpnService.pushToStack(id, value), HttpStatus.OK);
         } catch (final StackNotFoundException e) {
-            log.warn(e.getMessage(), e);
+            log.warn("pushInStack: " + e.getMessage());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
@@ -69,7 +69,7 @@ public class RpnController {
             log.error(e.getMessage(), e);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         } catch (final StackNotFoundException e) {
-            log.warn(e.getMessage(), e);
+            log.warn("applyOperator: " + e.getMessage());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (final OperationFailedException e) {
             log.error(e.getMessage(), e);
