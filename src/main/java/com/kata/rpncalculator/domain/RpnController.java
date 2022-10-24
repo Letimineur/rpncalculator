@@ -1,6 +1,8 @@
 package com.kata.rpncalculator.domain;
 
 import com.kata.rpncalculator.data.entity.CalculatorStack;
+import com.kata.rpncalculator.services.RpnService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,8 @@ import java.util.List;
 @RequestMapping("/rpn")
 public class RpnController {
 
+    @Autowired
+    RpnService rpnService;
 
     @GetMapping("/op")
     public ResponseEntity<String> getAllOperators() {
