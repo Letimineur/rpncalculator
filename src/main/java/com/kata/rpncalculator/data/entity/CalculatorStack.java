@@ -11,11 +11,11 @@ public class CalculatorStack {
     @Column(name = "stack_id")
     private long id;
 
-    @Column(name = "stack_values",nullable = false)
+    @Column(name = "stack_values", nullable = false)
     @ElementCollection
     private List<Double> values;
 
-    public CalculatorStack(){
+    public CalculatorStack() {
         this.values = new ArrayList<>();
     }
 
@@ -24,10 +24,10 @@ public class CalculatorStack {
     }
 
     public long getId() {
-        return id;
+        return this.id;
     }
 
     public List<Double> getValues() {
-        return values;
+        return this.values;
     }
 }

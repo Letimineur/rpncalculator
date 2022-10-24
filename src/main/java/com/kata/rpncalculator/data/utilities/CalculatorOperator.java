@@ -30,11 +30,19 @@ public enum CalculatorOperator {
         throw new BadOperatorException("No operator found for " + symbol);
     }
 
+    public static String printAvailableOperator() {
+        final StringBuilder sb = new StringBuilder("All available operator are:");
+        for (final CalculatorOperator op : CalculatorOperator.values()) {
+            sb.append(" ").append(op.symbol);
+        }
+        return sb.toString();
+    }
+
     public String getSymbol() {
-        return symbol;
+        return this.symbol;
     }
 
     public DualDoubleLambda getFx() {
-        return fx;
+        return this.fx;
     }
 }

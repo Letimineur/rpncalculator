@@ -18,17 +18,17 @@ public class RpnServiceImpl implements RpnService {
 
     @Override
     public CalculatorStack createStack() {
-        return stackRepository.save(new CalculatorStack());
+        return this.stackRepository.save(new CalculatorStack());
     }
 
     @Override
     public List<CalculatorStack> getAllStacks() {
-        return (List<CalculatorStack>) stackRepository.findAll();
+        return (List<CalculatorStack>) this.stackRepository.findAll();
     }
 
     @Override
-    public CalculatorStack getStack(final Long id) {
-        final Optional<CalculatorStack> optionalCalculatorStack = stackRepository.findById(id);
+    public CalculatorStack getStack(final Long id) throws StackNotFoundException {
+        final Optional<CalculatorStack> optionalCalculatorStack = this.stackRepository.findById(id);
         if (optionalCalculatorStack.isPresent()) {
             return optionalCalculatorStack.get();
         }
@@ -36,14 +36,14 @@ public class RpnServiceImpl implements RpnService {
     }
 
     @Override
-    public CalculatorStack pushToStack(final Long id, final double value) {
+    public CalculatorStack pushToStack(final Long id, final double value) throws StackNotFoundException {
         final CalculatorStack stackToUpdate = getStack(id);
         stackToUpdate.getValues().add(value);
-        return stackRepository.save(stackToUpdate);
+        return this.stackRepository.save(stackToUpdate);
     }
 
     @Override
-    public CalculatorStack applyOperatorToStack(final Long id, final CalculatorOperator op) {
+    public CalculatorStack applyOperatorToStack(final Long id, final CalculatorOperator op) throws StackNotFoundException, OperationFailedException {
         final CalculatorStack stack = getStack(id);
         final List<Double> values = stack.getValues();
         final Optional<Double> calc = values.stream().skip(values.size() - 2).reduce((a, b) -> op.getFx().calc(a, b));
@@ -52,11 +52,11 @@ public class RpnServiceImpl implements RpnService {
         }
         stack.setValues(values.stream().limit(values.size() - 2).collect(Collectors.toList()));
         stack.getValues().add(calc.get());
-        return stackRepository.save(stack);
+        return this.stackRepository.save(stack);
     }
 
     @Override
     public void deleteStack(final Long id) {
-        stackRepository.deleteById(id);
+        this.stackRepository.deleteById(id);
     }
 }
