@@ -63,7 +63,6 @@ public class RpnController {
     }
 
     @PostMapping("/op/{op}/stack/{id}")
-    @Operation(summary = "applique un operateur",description = "apply op")
     public ResponseEntity<CalculatorStack> applyOperator(@PathVariable(name = "id") final Long id, @PathVariable(name = "op") final String op) {
         try {
             final CalculatorOperator operator = CalculatorOperator.getOperatorByValue(op);
