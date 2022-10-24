@@ -2,11 +2,13 @@ package com.kata.rpncalculator.services;
 
 import com.kata.rpncalculator.data.entity.CalculatorStack;
 import com.kata.rpncalculator.data.repository.StackRepository;
+import com.kata.rpncalculator.exceptions.StackNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
-public class RpnServiceImpl implements RpnService{
+public class RpnServiceImpl implements RpnService {
 
     @Autowired
     StackRepository stackRepository;
@@ -23,12 +25,18 @@ public class RpnServiceImpl implements RpnService{
 
     @Override
     public CalculatorStack getStack(final Long id) {
-        return null;
+        final Optional<CalculatorStack> optionalCalculatorStack = stackRepository.findById(id);
+        if (optionalCalculatorStack.isPresent()) {
+            return optionalCalculatorStack.get();
+        }
+        throw new StackNotFoundException("No Stack found for this id: " + id);
     }
 
     @Override
     public CalculatorStack pushToStack(final Long id, final double value) {
-        return null;
+        final CalculatorStack stackToUpdate = getStack(id);
+        stackToUpdate.getValues().add(value);
+        return stackRepository.save(stackToUpdate);
     }
 
     @Override
